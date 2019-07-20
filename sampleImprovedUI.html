@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> <h1> Correlation Function Calculator </h1></title>
+</head>
+<body>
+	<h1> Correlation Function Calculator </h1>
+	<div> </div>
+
+	<h3> Please enter the name of the file containing the coordinates of your data in the format: </h3>
+	<p>x1, y1, z1 </p>
+	<p>x2, y2, z2 </p>
+	<p>x3, ys, z3 </p>
+	<p>...</p>
+
+	<h3>.txt and .csv files are accepted </h3>
+
+	<form> <label> Coordinate File: <input type="text" name="coordinates"> </label><button name="upload"> Upload File </button> </form>
+
+	<div></div>
+
+	<form> 
+		<fieldset>
+			<legend> User Inputs: </legend>
+				<div> <h3> Enter the maximum possible values of each coordinate: </h3> </div>
+				<label> x maximum: <input type="number" name="xmax"> </label>
+				<label> y maximum: <input type="number" name="ymax"> </label>
+				<label> z maximum: <input type="number" name="zmax"> </label>
+
+				<div> <h3> Enter the minimum possible values of each coordinate: </h3></div>
+				<label> x minimum: <input type="number" name="xmin"> </label>
+				<label> y minimum: <input type="number" name="ymin"> </label>
+				<label> z minimum: <input type="number" name="zmin"> </label>
+
+				<div></div>
+
+				<h3> Enter the maximum correlation length that should be calculated: </h3>
+				<label> Max Correlation Length: <input type="number" name="maxLength"> </label>
+
+				<h3> Enter the minimum correlation length that should be calculated: </h3>
+				<label> Min Correlation Length: <input type="number" name="minLength"> </label>
+
+
+				<div></div>
+
+				<h3> How Many bins should be used: </h3>
+				<label> Bins: <form> <input type="number" name="binNum"></form></label>
+		</fieldset>
+	</form>
+
+	<br>
+
+	<button name=calculate> Calculate </button>
+
+</body>
+</html>
