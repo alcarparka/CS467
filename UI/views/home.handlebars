@@ -15,7 +15,13 @@
 	<p>...</p>
 
 	<h2>.txt and .csv files are accepted </h2>
-	<button name="upload"> Upload File </button></span>
+
+        <form action="/userFileSubmit.handlebars">
+                <input type="file" name="dataDoc" accept=".txt, .csv">
+                <input type="submit" value="Submit File">
+        </form>
+
+	</span>
 	</div><br>
 
 	<div style="text-align: center;">
@@ -38,6 +44,7 @@
 
 	<span class="c">
 	<h2> How Many bins should be used: <form> <input type="number" name="binNum"></form></h2>
+
 	<button name=calculate> Calculate </button>
 	</span>
 	</div>
