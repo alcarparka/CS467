@@ -16,8 +16,8 @@
 
 	<h2>.txt and .csv files are accepted </h2>
 
-        <form action="/userFileSubmit.handlebars">
-                <input type="file" name="dataDoc" accept=".txt, .csv">
+        <form method="POST" enctype="multipart/form-data" action="/userFileSubmit">
+                <input type="file" name="file" accept=".txt, .csv">
                 <input type="submit" value="Submit File">
         </form>
 
