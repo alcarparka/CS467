@@ -30,6 +30,67 @@ app.get('/myGraphs',function(req,res,next){
     res.render('myGraphs', context);
 });
 
+
+app.get('/', function (req, res){
+    res.sendFile(__dirname);
+});
+
+app.post('/', function (req, res){
+    var form = new formidable.IncomingForm();
+
+    form.parse(req);
+
+    form.on('fileBegin', function (name, file){
+        file.path = __dirname + '/uploads/' + file.name;
+    });
+
+    form.on('file', function (name, file){
+        console.log('Uploaded ' + file.name);
+    });
+
+    res.sendFile(__dirname);
+});
+
+
+
+/*app.get('/', function (req, res){
+    res.sendFile(__dirname + '/myGraphs');
+    console.log('in app.Get');
+});
+
+app.post('/', function (req, res){
+    var form = new formidable.IncomingForm();
+
+    form.parse(req);
+
+    form.on('fileBegin', function (name, file){
+        file.path = __dirname + '/uploads/' + file.name;
+    });
+
+    form.on('file', function (name, file){
+        console.log('Uploaded ' + file.name);
+    });
+
+    res.sendFile(__dirname + '/myGraphs');
+    console.log('in app.Post');
+});
+
+
+
+app.post('/userSubmitFile', (req, res) => {
+  new formidable.IncomingForm().parse(req, (err, fields, files) => {
+    if (err) {
+      console.error('Error', err)
+      throw err
+    }
+    console.log('Fields', fields)
+    console.log('Files', files)
+    files.map(file => {
+      console.log(file)
+    })
+  })
+})
+
 app.post('/userFileSubmit', (req, res) => {
   new formidable.IncomingForm().parse(req)
     .on('field', (name, field) => {
@@ -48,7 +109,7 @@ app.post('/userFileSubmit', (req, res) => {
     .on('end', () => {
       res.end()
     })
-})
+})*/
 
 app.use(function(req,res){
     res.status(404);
