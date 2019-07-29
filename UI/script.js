@@ -37,7 +37,6 @@ app.get('/', function (req, res){
 
 app.post('/', function (req, res){
 
-    if(req.body['Upload']) {
         var form = new formidable.IncomingForm();
 
         form.parse(req);
@@ -51,9 +50,7 @@ app.post('/', function (req, res){
         });
 
         res.sendFile(__dirname);
-    }
 });
-
 
 
 /*app.get('/', function (req, res){
