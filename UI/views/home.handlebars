@@ -26,28 +26,74 @@
 
 	<div style="text-align: center;">
 	<span class="b"> <h2> Enter the maximum possible values of each coordinate: </h2>
-	<p>x maximum: </p><form> <input type="number" name="xmax"></form>
-	<p>y maximum: </p><form> <input type="number" name="ymax"></form>
-	<p>z maximum: </p><form> <input type="number" name="zmax"></form></span>
+	x maximum: <input type="number" id="xmax" />
+	y maximum: <input type="number" id="ymax" />
+	z maximum: <input type="number" id="zmax" /></span>
 
 	<span class="b"> <h2> Enter the minimum possible values of each coordinate: </h2>
-	<p>x minimum: </p><form> <input type="number" name="xmin"></form>
-	<p>y minimum: </p><form> <input type="number" name="ymin"></form>
-	<p>z minimum: </p><form> <input type="number" name="zmin"></form></span>
-	</div><br>
-	
-	<div style="text-align: center;">
+	x minimum: <input type="number" id="xmin" />
+	y minimum: <input type="number" id="ymin" />
+	z minimum: <input type="number" id="zmin" /></span>
+	<br>
+
 	<span class="c">
-	<h2> Enter the maximum correlation length that should be calculated: <form> <input type="number" name="maxLength"></form></h2>
-	<h2> Enter the minimum correlation length that should be calculated: <form> <input type="number" name="minLength"></form></h2>
+	Enter the maximum correlation length that should be calculated: <input type="number" id="maxLength" />
+	Enter the minimum correlation length that should be calculated: <input type="number" id="minLength" />
 	</span>
 
 	<span class="c">
-	<h2> How Many bins should be used: <form> <input type="number" name="binNum"></form></h2>
-
-	<button name=calculate> Calculate </button>
-	</span>
+	How Many bins should be used: <input type="number" id="binNum" />
+    </span>
+        <br>
+	<input type="button" id="bt" value="Calculate" onclick="saveFile()" />
 	</div>
 
 </body>
+
+<script>
+    let saveFile = () => {
+        const xmax = document.getElementById('xmax');
+        const ymax = document.getElementById('ymax');
+        const zmax = document.getElementById('zmax');
+
+        const xmin = document.getElementById('xmin');
+        const ymin = document.getElementById('ymin');
+        const zmin = document.getElementById('zmin');
+
+        const maxLength = document.getElementById('maxLength');
+        const minLength = document.getElementById('minLength');
+
+        const binNum = document.getElementById('binNum');
+
+        let data =
+                '\rX Maximum:' + xmax.value + '\r\n' +
+                'Y Maximum: ' + ymax.value + '\r\n' +
+                'Z Maximum: ' + zmax.value + '\r\n\r\n' +
+                'X Minimum: ' + xmin.value + '\r\n' +
+                'Y Minimum: ' + ymin.value + '\r\n' +
+                'Z Minimum: ' + zmin.value + '\r\n\r\n' +
+                'Maximum Correlation Length: ' + maxLength.value + '\r\n' +
+                'Minimum Correlation Length: ' + minLength.value + '\r\n' +
+                'Number of bins: ' + binNum.value;
+
+        const textToBLOB = new Blob([data], { type: 'text/plain' });
+        const fileName = 'formData.txt';
+
+        let newLink = document.createElement("a");
+        newLink.download = fileName;
+
+        if(window.webkitURL != null) {
+            newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+        }
+        else
+        {
+            newLink.href = window.URL.createObjectURL(textToBLOB);
+            newLink.style.display = "none";
+            document.body.appendChild(newLink);
+        }
+
+        newLink.click();
+    }
+</script>
+
 </html>
