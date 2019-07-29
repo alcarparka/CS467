@@ -28,6 +28,7 @@ for iline in f:
 	l = l.split()
 	l = [float(i) for i in l]
 	coord_lst.append(l)
+f.close()
 
 #generate random coords
 rand_coord_lst = [[random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100)]   for i in range(len(coord_lst) * randomMultiplier)]
@@ -122,10 +123,11 @@ plt.title("Two Point Correlation Function")
 plt.plot(bin_limits[1:], tpcf_vals, ls='none', marker='o', color='blue')
 plt.xscale('log')
 plt.yscale('log')
-plt.xlabel("distance")
-plt.ylabel("xi(r)")
-plt.show()
+plt.xlabel("Distance (r)")
+plt.ylabel(r'$\xi(r)$')
+plt.axis([1, 100, 10**(-2.5), 10])
 plt.savefig("tpcf_plot.pdf", format='pdf')
+#plt.show()
 plt.close()
 
 
