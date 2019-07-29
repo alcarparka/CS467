@@ -1,15 +1,27 @@
-## simple and ugly version of the two-point correlation function calculator
+## simple version of the two-point correlation function calculator
 ## Justin Clarke
 
 import matplotlib.pyplot as plt
+from math import log
 import random
 import time
 
-multiplier = 1
+# arguments passed from UI
+coordinateFileName = "test_coords.txt"
+maxSpaceX = 100
+minSpaceX = 0
+maxSpaceY = 100
+minSpaceY = 0
+maxSpaceZ = 100
+minSpaceZ = 0
+maxLength = 100
+minLength = 0
+numBins = 10
+randomMultiplier = 1
+periodicFlag = 0
 
 # read in data coordinates
-fl = "test_coords.txt"
-f = open(fl)
+f = open(coordinateFileName)
 coord_lst = []
 for iline in f:
 	l = iline.strip()
@@ -18,14 +30,7 @@ for iline in f:
 	coord_lst.append(l)
 
 #generate random coords
-rand_coord_lst = [[random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100)]   for i in range(len(coord_lst) * multiplier)]
-
-#x = [i[0] for i in rand_coord_lst]
-#y = [i[1] for i in rand_coord_lst]
-#plt.title("Random Coordinates")
-#plt.plot(x, y, ls='none', marker='.', color='green')
-#plt.show()
-#plt.close()
+rand_coord_lst = [[random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100)]   for i in range(len(coord_lst) * randomMultiplier)]
 
 def dist(coord1, coord2):
 	x1 = coord1[0]
@@ -37,8 +42,14 @@ def dist(coord1, coord2):
 	d = ((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2)**.5
 	return d
 
+## determine exponential separation of radius bins
+binWidth = log(maxLength, 10)/numBins
+##create list of bin ranges in the form [[min, max], [min, max],...]
+bin_ranges = []
+for ibin in range(1, numBins + 1): 
+		bin_ranges.append(ibin*binWidth)
 
-bin_limits = [0, 10**0.2, 10**0.4, 10**0.6, 10**0.8, 10, 10**1.2, 10**1.4, 10**1.6, 10**1.8, 10**2]
+bin_limits = [0] + [10**i for i in bin_ranges]
 DD_bin_counts = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 DR_bin_counts = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 RR_bin_counts = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -46,46 +57,44 @@ RR_bin_counts = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 # start timer
 start = time.time()
 
+
 ## find DD counts
 print("Finding DD counts")
-for i in coord_lst:
-	for j in coord_lst:
-		d = dist(i, j)
-		if d > 0:
-			k = 1
-			while k < 11:
-				if d > bin_limits[k - 1] and d <= bin_limits[k]:
-					DD_bin_counts[k - 1] += 1
-					k = 12
-				k += 1
-
+DD_dists = [dist(i, j) for i in coord_lst for j in coord_lst]
+for d in DD_dists:
+	if d > 0:
+		k = 1
+		while k < 11:
+			if d > bin_limits[k - 1] and d <= bin_limits[k]:
+				DD_bin_counts[k - 1] += 1
+				k = 12
+			k += 1
 
 ## find DR counts
 print("Finding DR counts")
-for i in coord_lst:
-	for j in rand_coord_lst:
-		d = dist(i, j)
-		if d > 0:
-			k = 1
-			while k < 11:
-				if d > bin_limits[k - 1] and d <= bin_limits[k]:
-					DR_bin_counts[k - 1] += 1
-					k = 12
-				k += 1
+DR_dists = [dist(i, j) for i in coord_lst for j in rand_coord_lst]
+for d in DR_dists:
+	if d > 0:
+		k = 1
+		while k < 11:
+			if d > bin_limits[k - 1] and d <= bin_limits[k]:
+				DR_bin_counts[k - 1] += 1
+				k = 12
+			k += 1
 
 
 ## find RR counts
 print("Finding RR counts")
-for i in rand_coord_lst:
-	for j in rand_coord_lst:
-		d = dist(i, j)
-		if d > 0:
-			k = 1
-			while k < 11:
-				if d > bin_limits[k - 1] and d <= bin_limits[k]:
-					RR_bin_counts[k - 1] += 1
-					k = 12
-				k += 1
+RR_dists = [dist(i, j) for i in rand_coord_lst for j in rand_coord_lst]
+for d in RR_dists:
+	if d > 0:
+		k = 1
+		while k < 11:
+			if d > bin_limits[k - 1] and d <= bin_limits[k]:
+				RR_bin_counts[k - 1] += 1
+				k = 12
+			k += 1
+
 
 tpcf_vals = []
 nr = len(rand_coord_lst)
@@ -116,17 +125,8 @@ plt.yscale('log')
 plt.xlabel("distance")
 plt.ylabel("xi(r)")
 plt.show()
+plt.savefig("tpcf_plot.pdf", format='pdf')
 plt.close()
-
-
-
-
-
-
-
-
-
-
 
 
 
