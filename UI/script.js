@@ -36,19 +36,22 @@ app.get('/', function (req, res){
 });
 
 app.post('/', function (req, res){
-    var form = new formidable.IncomingForm();
 
-    form.parse(req);
+    if(req.body['Upload']) {
+        var form = new formidable.IncomingForm();
 
-    form.on('fileBegin', function (name, file){
-        file.path = __dirname + '/uploads/' + file.name;
-    });
+        form.parse(req);
 
-    form.on('file', function (name, file){
-        console.log('Uploaded ' + file.name);
-    });
+        form.on('fileBegin', function (name, file) {
+            file.path = __dirname + '/uploads/' + file.name;
+        });
 
-    res.sendFile(__dirname);
+        form.on('file', function (name, file) {
+            console.log('Uploaded ' + file.name);
+        });
+
+        res.sendFile(__dirname);
+    }
 });
 
 
@@ -126,5 +129,3 @@ app.use(function(err, req, res, next){
 app.listen(app.get('port'), function(){
     console.log('Express started on port ' + app.get('port') + '; press Ctrl-C to terminate.');
 });
-
-
