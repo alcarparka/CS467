@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title> <h1> Correlation Function Calculator </h1></title>
+    <title><h1> Correlation Function Calculator </h1></title>
 </head>
 <body>
-	<h1> Correlation Function Calculator </h1>
+<h1> Correlation Function Calculator </h1>
 
-	<div style="text-align: center;">
+<div style="text-align: center;">
 	<span class="a">
 	<h2> Please enter the name of the file containing the coordinates of your data in the format: </h2>
 	<p>x1, y1, z1 </p>
@@ -18,36 +18,38 @@
 
         <form method="POST" enctype="multipart/form-data" action="/">
                 <input type="file" name="upload" accept=".txt, .csv" multiple>
-                <input type="submit" value="Upload">
+                <input type="submit" name="Add File" value="Upload">
         </form>
 
 	</span>
-	</div><br>
+</div>
+<br>
+<div style="text-align: center;">
+    <span class="a">
+<form method="POST" action="/myGraphs">
+    <h2> Enter the maximum possible values of each coordinate: </h2>
+	x maximum: <input type="number" id="xmax" name="xmax" placeholder="x">
+	y maximum: <input type="number" id="ymax" name="ymax" placeholder="y">
+	z maximum: <input type="number" id="zmax" name="zmax" placeholder="z">
 
-	<div style="text-align: center;">
-	<span class="b"> <h2> Enter the maximum possible values of each coordinate: </h2>
-	<p>x maximum: </p><form> <input type="number" name="xmax"></form>
-	<p>y maximum: </p><form> <input type="number" name="ymax"></form>
-	<p>z maximum: </p><form> <input type="number" name="zmax"></form></span>
+    <h2> Enter the minimum possible values of each coordinate: </h2>
+	x minimum: <input type="number" id="xmin" name="xmin" placeholder="x">
+	y minimum: <input type="number" id="ymin" name="ymin" placeholder="y">
+	z minimum: <input type="number" id="zmin" name="zmin" placeholder="z">
 
-	<span class="b"> <h2> Enter the minimum possible values of each coordinate: </h2>
-	<p>x minimum: </p><form> <input type="number" name="xmin"></form>
-	<p>y minimum: </p><form> <input type="number" name="ymin"></form>
-	<p>z minimum: </p><form> <input type="number" name="zmin"></form></span>
-	</div><br>
-	
-	<div style="text-align: center;">
-	<span class="c">
-	<h2> Enter the maximum correlation length that should be calculated: <form> <input type="number" name="maxLength"></form></h2>
-	<h2> Enter the minimum correlation length that should be calculated: <form> <input type="number" name="minLength"></form></h2>
-	</span>
+	<h2> Enter the maximum correlation length that should be calculated:  <input type="number" id="maxLength"
+                                                                                 name="maxLength"
+                                                                                 placeholder="maximum"></h2>
+	<h2> Enter the minimum correlation length that should be calculated: <input type="number" id="minLength"
+                                                                                name="minLength"
+                                                                                placeholder="minimum"></h2>
 
-	<span class="c">
-	<h2> How Many bins should be used: <form> <input type="number" name="binNum"></form></h2>
+	<h2> How Many bins should be used:  <input type="number" id="binNum" name="binNum" placeholder="# of bins"></h2>
 
-	<button name=calculate> Calculate </button>
-	</span>
-	</div>
-
+    <input type="submit" name="Calculate" value="Calculate"/>
+</form>
+    </span>
+</div>
 </body>
+
 </html>

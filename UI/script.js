@@ -2,13 +2,12 @@ var express = require('express');
 
 var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
-var session = require('express-session');
 var formidable = require('formidable');
 var bodyParser = require('body-parser');
 var request = require('request');                       //Reqire request
 var path = require('path');
+const fs = require('fs');
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(session({secret:'SuperSecretPassword'}));
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
@@ -36,19 +35,67 @@ app.get('/', function (req, res){
 });
 
 app.post('/', function (req, res){
-    var form = new formidable.IncomingForm();
 
-    form.parse(req);
+    if(req.body['Add File'])
+    {
+        var form = new formidable.IncomingForm();
 
-    form.on('fileBegin', function (name, file){
-        file.path = __dirname + '/uploads/' + file.name;
-    });
+        form.parse(req);
 
-    form.on('file', function (name, file){
-        console.log('Uploaded ' + file.name);
-    });
+        form.on('fileBegin', function (name, file){
+            file.path = __dirname + '/uploads/' + file.name;
+        });
 
-    res.sendFile(__dirname);
+        form.on('file', function (name, file){
+            console.log('Uploaded ' + file.name);
+        });
+
+        res.sendFile(__dirname);
+        return;
+    }
+
+    if(req.body['Calculate']) {
+        console.log('Create text file');
+
+        var xmax = document.getElementById(xmax);
+        var ymax = document.getElementById(ymax);
+        var zmax = document.getElementById(zmax);
+
+        var xmin = document.getElementById(xmin);
+        var ymin = document.getElementById(ymin);
+        var zmin = document.getElementById(zmin);
+
+        var maxLength = document.getElementById(maxLength);
+        var minLength = document.getElementById(minLength);
+
+        var binNum = document.getElementById(binNum);
+
+        let data = new Buffer(
+            '\rX Maximum:' + xmax.value + '\r\n' +
+            'Y Maximum: ' + ymax.value + '\r\n' +
+            'Z Maximum: ' + zmax.value + '\r\n\r\n' +
+            'X Minimum: ' + xmin.value + '\r\n' +
+            'Y Minimum: ' + ymin.value + '\r\n' +
+            'Z Minimum: ' + zmin.value + '\r\n\r\n' +
+            'Maximum Correlation Length: ' + maxLength.value + '\r\n' +
+            'Minimum Correlation Length: ' + minLength.value + '\r\n' +
+            'Number of bins: ' + binNum.value);
+
+        let path = '/uploads/datafile.txt'
+
+        fs.open(path, 'w', function (err, fd) {
+            if (err) {
+                throw 'could not open file: ' + err;
+            }
+
+            fs.write(fd, data, 0, data.length, null, function (err) {
+                if (err) throw 'error writing file: ' + err;
+                fs.close(fd, function () {
+                    console.log('wrote the file successfully');
+                });
+            });
+        });
+    };
 });
 
 
