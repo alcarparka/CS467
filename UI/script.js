@@ -42,7 +42,18 @@ app.post('/', function (req, res){
         form.parse(req);
 
         form.on('fileBegin', function (name, file) {
-            file.path = __dirname + '/uploads/' + file.name;
+            //file.path = __dirname + '/uploads/' + file.name;
+           //if (getExtension(file)=='txt')
+	   if (file.name.split('.').pop()=="txt")
+	   {
+		file.path = __dirname + '/uploads/' + 'inputFile.txt';
+	   }
+           //if (getExtension(file)=='csv')
+           if (file.name.split('.').pop()=="csv")
+	   {
+		file.path = __dirname + '/uploads/' + 'inputFile.csv';
+	   }
+           //file.path = __dirname + '/uploads/' + 'inputFile';
         });
 
         form.on('file', function (name, file) {
