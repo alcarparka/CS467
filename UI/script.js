@@ -64,63 +64,40 @@ app.post('/', function (req, res){
 });
 
 
-/*app.get('/', function (req, res){
-    res.sendFile(__dirname + '/myGraphs');
-    console.log('in app.Get');
-});
+// New
 
-app.post('/', function (req, res){
-    var form = new formidable.IncomingForm();
+app.get('/inputFileValidate', validateInputFile); 
+  
+function validateInputFile(req, res) { 
+	
+	//console.log(__dirname);
 
-    form.parse(req);
+	var spawn = require("child_process").spawn; 
 
-    form.on('fileBegin', function (name, file){
-        file.path = __dirname + '/uploads/' + file.name;
-    });
+	var process = spawn('python3', ["./validTxt.py"]); 
 
-    form.on('file', function (name, file){
-        console.log('Uploaded ' + file.name);
-    });
+    	process.stdout.on('data', function(data) { 
+        	res.send(data.toString()); 
+    	} ) 
+} 
 
-    res.sendFile(__dirname + '/myGraphs');
-    console.log('in app.Post');
-});
+/*
+app.get('/name', callName); 
+  
+function callName(req, res) { 
 
+var spawn = require("child_process").spawn; 
 
+var process = spawn('python3',["./hello.py", 
+                            req.query.firstname, 
+                            req.query.lastname] ); 
 
-app.post('/userSubmitFile', (req, res) => {
-  new formidable.IncomingForm().parse(req, (err, fields, files) => {
-    if (err) {
-      console.error('Error', err)
-      throw err
-    }
-    console.log('Fields', fields)
-    console.log('Files', files)
-    files.map(file => {
-      console.log(file)
-    })
-  })
-})
-
-app.post('/userFileSubmit', (req, res) => {
-  new formidable.IncomingForm().parse(req)
-    .on('field', (name, field) => {
-      console.log('Field', name, field)
-    })
-    .on('file', (name, file) => {
-      console.log('Uploaded file', name, file)
-    })
-    .on('aborted', () => {
-      console.error('Request aborted by the user')
-    })
-    .on('error', (err) => {
-      console.error('Error', err)
-      throw err
-    })
-    .on('end', () => {
-      res.end()
-    })
-})*/
+process.stdout.on('data', function(data) { 
+        res.send(data.toString()); 
+    } ) 
+}   
+*/
+// New Function ^
 
 app.use(function(req,res){
     res.status(404);
