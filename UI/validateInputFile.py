@@ -50,7 +50,7 @@ if __name__ == '__main__':
     if os.path.exists('uploads/inputFile.csv')==True:
         print("inputFile.csv exists")
 
-        with open("uploads/inputFile.csv", "r") as f, open("uploads/inputFile.txt", "w") as newFile:
+        with open("uploads/inputFile.csv", "r") as f:
             n=0
             for l in f:
                 n+=1
@@ -83,9 +83,17 @@ if __name__ == '__main__':
                             print("number sequence provided is not a float")
                             quit()
                 # should be writting into a .txt file from here 
-                line= line.replace(",", " ")
-                newFile.write(line + '\n')
+                #line= line.replace(",", " ")
+                #newFile.write(line + '\n')
                     #print('\n')
                     #print("num Periods: ", numPeriods)
         print("valid csv data file provided")
+
+        with open("uploads/inputFile.csv", "r") as f, open("uploads/inputFile.txt", "w") as newFile:
+            for l in f:
+                # should be writting into a .txt file from here
+                line=l.strip()
+                line= line.replace(",", " ")
+                newFile.write(line + '\n')
+        print("csv data converted to .txt file")
 
