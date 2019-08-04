@@ -17,23 +17,26 @@
 	<h2>.txt and .csv files are accepted </h2>
 
 	<script>
-        function testFile() {
-        //let testFile = () => {
-        console.log("in testFile Function");
+        function redirectHome() {
+        console.log("redirecting to home page");
+        setTimeout(function(){
+	window.location.href="";
+	}, 8000);
         }
         </script>
 
 	<script>
         function redirect() {
-        //let testFile = () => {
+        setTimeout(function(){
         console.log("in redirect Function");
         window.location.href = "inputFileValidate";
+	}, 5000);
         }
         </script>
 
         <form method="POST" enctype="multipart/form-data" action="/">
                 <input type="file" name="upload" accept=".txt, .csv" multiple>
-                <input type="submit" value="Upload" onclick="testFile(); redirect();">
+                <input type="submit" value="Upload" onclick="redirect(); redirectHome();">
         </form>
 
 

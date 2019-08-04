@@ -70,15 +70,15 @@ app.get('/inputFileValidate', validateInputFile);
   
 function validateInputFile(req, res) { 
 	
-	//console.log(__dirname);
+	console.log(__dirname);
 
 	var spawn = require("child_process").spawn; 
 
-	var process = spawn('python3', ["./validTxt.py"]); 
+	var process = spawn('python3', ["./exists.py"]); 
 
     	process.stdout.on('data', function(data) { 
-        	res.send(data.toString()); 
-    	} ) 
+        	res.send(data.toString());
+    	} )
 } 
 
 /*
