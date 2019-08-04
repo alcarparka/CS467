@@ -71,20 +71,43 @@ app.post('/submit-form', (req, res) => {
     const maxLength = req.body.maxLength;
     const binNum = req.body.binNum;
 
-    var data = "xmax: " + xmax + "\r\n" + "ymax: " + ymax + "\r\n" + "zmax: " + zmax + "\r\n" +
+    if ( typeof xmax !== 'undefined' && xmax && typeof ymax !== 'undefined' && ymax && typeof zmax !== 'undefined' && zmax && typeof xmin !== 'undefined' && xmin && typeof ymin !== 'undefined' && ymin && typeof zmin !== 'undefined' && zmin && typeof maxLength !== 'undefined' && maxLength && typeof binNum !== 'undefined' && binNum)
+    {
+        if (xmax < 0 || ymax < 0 || zmax < 0 || xmin < 0 || ymin < 0 || zmin < 0 || maxLength < 0 || binNum < 0)
+        {
+            var message = "Error! Please enter non-zero values!!";
+            res.render('home', {message:message});
+        }
+        else if (xmax <= xmin || ymax <= ymin || zmax <= zmin)
+        {
+            var message = "Error! Max values must be greater than min values!";
+            res.render('home', {message:message});
+        }
+        else
+        {
+            var data = "xmax: " + xmax + "\r\n" + "ymax: " + ymax + "\r\n" + "zmax: " + zmax + "\r\n" +
                 "xmin: " + xmin + "\r\n" + "ymin: " + ymin + "\r\n" + "zmin: " + zmin + "\r\n" +
                 "maxLength: " + maxLength + "\r\n" + "binNum: " + binNum + "\r\n";
 
-    fs.truncate("data.txt", 0, function() {
-        fs.writeFile("data.txt", data, (err) => {
-            if(err) console.log(err);
-            console.log("Successfully Written to File.");
-        });
-    });
+            fs.truncate("data.txt", 0, function() {
+                fs.writeFile("data.txt", data, (err) => {
+                    if(err) console.log(err);
+                    console.log("Successfully Written to File.");
+                });
+            });
 
-    res.redirect('/');
+            res.redirect('/');
 
-    res.end();
+            res.end();
+        }
+    }
+    else
+    {
+        var message = "Error! Please fill out all values in the form!";
+        res.render('home', {message:message});
+    }
+
+
 });
 
 
