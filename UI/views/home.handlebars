@@ -44,76 +44,36 @@
 	</div><br>
 
 	<div style="text-align: center;">
-	<span class="b"> <h2> Enter the maximum possible values of each coordinate: </h2>
-	x maximum: <input type="number" id="xmax" /><br>
-	y maximum: <input type="number" id="ymax" /><br>
-	z maximum: <input type="number" id="zmax" /></span>
+        <form method="POST" action="/submit-form">
+            <span class="b"> <h2> Enter the maximum possible values of each coordinate: </h2>
+            x maximum: <input type="text" name="xmax" /><br>
+            y maximum: <input type="text" name="ymax" /><br>
+            z maximum: <input type="text" name="zmax" /></span>
 
-	<span class="b"> <h2> Enter the minimum possible values of each coordinate: </h2>
-	x minimum: <input type="number" id="xmin" /><br>
-	y minimum: <input type="number" id="ymin" /><br>
-	z minimum: <input type="number" id="zmin" /></span>
-	<br>
+            <span class="b"> <h2> Enter the minimum possible values of each coordinate: </h2>
+            x minimum: <input type="text" name="xmin" /><br>
+            y minimum: <input type="text" name="ymin" /><br>
+            z minimum: <input type="text" name="zmin" /></span>
+            <br>
 
-	<span class="c">
-	Enter the maximum correlation length that should be calculated: <input type="number" id="maxLength" /><br>
-	Enter the minimum correlation length that should be calculated: <input type="number" id="minLength" /><br>
-	</span>
+            <span class="c">
+            Enter the maximum correlation length that should be calculated: <input type="text" name="maxLength" /><br>
+            </span>
 
-	<span class="c">
-	How Many bins should be used: <input type="number" id="binNum" />
-    </span>
-        <br>
-	<input type="button" id="bt" value="Calculate" onclick="saveFile()" />
+            <span class="c">
+            How Many bins should be used: <input type="text" name="binNum" />
+            </span>
+            <br>
+            <input type="submit" />
+        </form>
 	</div>
 
+    <div style="text-align: center;">
+        <span class="c">
+            <h2>{{ message }}</h2>
+        </span>
+    </div>
+
+
 </body>
-
-<script>
-    let saveFile = () => {
-        const xmax = document.getElementById('xmax');
-        const ymax = document.getElementById('ymax');
-        const zmax = document.getElementById('zmax');
-
-        const xmin = document.getElementById('xmin');
-        const ymin = document.getElementById('ymin');
-        const zmin = document.getElementById('zmin');
-
-        const maxLength = document.getElementById('maxLength');
-        const minLength = document.getElementById('minLength');
-
-        const binNum = document.getElementById('binNum');
-
-        let data =
-                '\rX Maximum: ' + xmax.value + '\r\n' +
-                'Y Maximum: ' + ymax.value + '\r\n' +
-                'Z Maximum: ' + zmax.value + '\r\n\r\n' +
-                'X Minimum: ' + xmin.value + '\r\n' +
-                'Y Minimum: ' + ymin.value + '\r\n' +
-                'Z Minimum: ' + zmin.value + '\r\n\r\n' +
-                'Maximum Correlation Length: ' + maxLength.value + '\r\n' +
-                'Minimum Correlation Length: ' + minLength.value + '\r\n' +
-                'Number of bins: ' + binNum.value;
-
-        const textToBLOB = new Blob([data], { type: 'text/plain' });
-        const fileName = 'formData.txt';
-
-        let newLink = document.createElement("a");
-        newLink.download = fileName;
-
-        if(window.webkitURL != null) {
-            newLink.href = window.webkitURL.createObjectURL(textToBLOB);
-        }
-        else
-        {
-            newLink.href = window.URL.createObjectURL(textToBLOB);
-            newLink.style.display = "none";
-            document.body.appendChild(newLink);
-        }
-
-        newLink.click();
-    }
-</script>
-
-
 </html>
