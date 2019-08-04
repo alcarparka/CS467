@@ -2,13 +2,12 @@ var express = require('express');
 
 var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
-var session = require('express-session');
+var fs = require('fs');
 var formidable = require('formidable');
 var bodyParser = require('body-parser');
 var request = require('request');                       //Reqire request
 var path = require('path');
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(session({secret:'SuperSecretPassword'}));
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
@@ -29,7 +28,6 @@ app.get('/myGraphs',function(req,res,next){
     console.log(context);
     res.render('myGraphs', context);
 });
-
 
 /*app.get('/', function (req, res){
     res.sendFile(__dirname);
@@ -61,6 +59,32 @@ app.post('/', function (req, res){
         });
 
         res.sendFile(__dirname + '/views/home.handlebars');
+});
+
+app.post('/submit-form', (req, res) => {
+    const xmax = req.body.xmax;
+    const ymax = req.body.ymax;
+    const zmax = req.body.zmax;
+    const xmin = req.body.xmin;
+    const ymin = req.body.ymin;
+    const zmin = req.body.zmin;
+    const maxLength = req.body.maxLength;
+    const binNum = req.body.binNum;
+
+    var data = "xmax: " + xmax + "\r\n" + "ymax: " + ymax + "\r\n" + "zmax: " + zmax + "\r\n" +
+                "xmin: " + xmin + "\r\n" + "ymin: " + ymin + "\r\n" + "zmin: " + zmin + "\r\n" +
+                "maxLength: " + maxLength + "\r\n" + "binNum: " + binNum + "\r\n";
+
+    fs.truncate("data.txt", 0, function() {
+        fs.writeFile("data.txt", data, (err) => {
+            if(err) console.log(err);
+            console.log("Successfully Written to File.");
+        });
+    });
+
+    res.redirect('/');
+
+    res.end();
 });
 
 
