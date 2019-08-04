@@ -85,9 +85,7 @@ app.post('/submit-form', (req, res) => {
         }
         else
         {
-            var data = "xmax: " + xmax + "\r\n" + "ymax: " + ymax + "\r\n" + "zmax: " + zmax + "\r\n" +
-                "xmin: " + xmin + "\r\n" + "ymin: " + ymin + "\r\n" + "zmin: " + zmin + "\r\n" +
-                "maxLength: " + maxLength + "\r\n" + "binNum: " + binNum + "\r\n";
+            var data = xmax + " " + ymax + " " + zmax + " " +  xmin + " " + ymin + " " + zmin + " " + maxLength + " " + binNum;
 
             fs.truncate("data.txt", 0, function() {
                 fs.writeFile("data.txt", data, (err) => {
