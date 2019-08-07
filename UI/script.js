@@ -40,18 +40,19 @@ app.post('/', function (req, res){
         form.parse(req);
 
         form.on('fileBegin', function (name, file) {
-            //file.path = __dirname + '/uploads/' + file.name;
-           //if (getExtension(file)=='txt')
+           
+           // for .txt
 	   if (file.name.split('.').pop()=="txt")
 	   {
 		file.path = __dirname + '/uploads/' + 'inputFile.txt';
 	   }
-           //if (getExtension(file)=='csv')
+           
+	   // for .csv
            if (file.name.split('.').pop()=="csv")
 	   {
 		file.path = __dirname + '/uploads/' + 'inputFile.csv';
 	   }
-           //file.path = __dirname + '/uploads/' + 'inputFile';
+           
         });
 
         form.on('file', function (name, file) {
@@ -59,7 +60,7 @@ app.post('/', function (req, res){
         });
 
         
-        res.sendFile(__dirname + '/views/home.handlebars');
+        //res.sendFile(__dirname + '/views/home.handlebars');
 
 });
 
