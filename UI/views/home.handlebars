@@ -20,8 +20,9 @@
         function redirectHome() {
         console.log("redirecting to home page");
         setTimeout(function(){
+        console.log("done waiting in redirect home");
 	window.location.href="";
-	}, 8000);
+	}, 15000);
         }
         </script>
 
@@ -30,13 +31,13 @@
         setTimeout(function(){
         console.log("in redirect Function");
         window.location.href = "inputFileValidate";
-	}, 5000);
+	}, 8000);
         }
         </script>
 
         <form method="POST" enctype="multipart/form-data" action="/">
                 <input type="file" name="upload" accept=".txt, .csv" multiple>
-                <input type="submit" value="Upload" onclick="redirect(); redirectHome();">
+                <input type="submit" value="Upload" target="_blank" onclick="redirect();">
         </form>
 
 
@@ -73,6 +74,10 @@
             <h2>{{ message }}</h2>
         </span>
     </div>
+
+   <input type="button" value="Calculate" onclick="alert('Before double clicking Calculate to run, make sure that you have submitted an input file and filled the forms for max, min, and bin count!');" ondblclick="redirect();">
+             
+   </form>
 
 
 </body>

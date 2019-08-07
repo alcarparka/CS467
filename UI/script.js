@@ -58,7 +58,9 @@ app.post('/', function (req, res){
             console.log('Uploaded ' + file.name);
         });
 
+        
         res.sendFile(__dirname + '/views/home.handlebars');
+
 });
 
 app.post('/submit-form', (req, res) => {
@@ -110,21 +112,116 @@ app.post('/submit-form', (req, res) => {
 
 
 // New
+/*
+app.get("/inputFileValidate", function(req, res, next){
+    res.render('inputFileValidate');
+});*/
+
 
 app.get('/inputFileValidate', validateInputFile); 
   
 function validateInputFile(req, res) { 
+        
+        //res.render('inputFileValidate'); 
 	
 	console.log(__dirname);
 
 	var spawn = require("child_process").spawn; 
 
 	var process = spawn('python3', ["./validateInputFile.py"]); 
+      
+        var dataString = ""; 
 
+	//var results = {"id":"YoMama"};
+        //fs.readFile('__dirname/UI/uploads/inputFile.txt', 'utf8', function(err, contents) {
+        //console.log(contents);
+        //});
+ 
+        //console.log('after calling readFile');
+      
     	process.stdout.on('data', function(data) { 
-        	res.send(data.toString());
-    	} )
+        	//res.send(data.toString());
+
+                res.render('inputFileValidate', {results: data.toString()});
+                
+        	//dataString=data.toString();
+                //console.log(dataString);
+    	})
+
+        
+/*function populatePre(url) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        document.getElementById('contents').textContent = this.responseText;
+    };
+    xhr.open('GET', url);
+    xhr.send();
+}
+populatePre('__dirname/uploads/inputFile.txt');*/
+
 } 
+
+function goHome(req, res) {
+
+setTimeout(function(){
+        console.log("in goHome Function");
+        res.redirect('/');
+        }, 10000);
+}
+
+
+
+/*app.get('inputFileValidate2', validateInputFile);
+{
+
+console.log(__dirname);
+
+        var spawn = require("child_process").spawn;
+
+        var process = spawn('python3', ["./validateInputFile.py"]);*/
+
+        /*process.stdout.on('data', function(data) { 
+                 res.send(data.toString());
+                          })*/
+        //res.render('inputFileValidate');
+
+
+/*<script>
+<html>
+<head>
+        <title></title>
+</head>
+<body>
+
+
+
+<input type="button" id="btn" value="validate results" onclick="populatePre(); log();">
+
+<p id="fooBar"> Results of Input File Data Validation: </p>
+
+<pre id="contents"></pre>
+
+<script>
+function populatePre(url) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        document.getElementById('contents').textContent = this.responseText;
+    };
+    xhr.open('GET', url);
+    xhr.send();
+}
+populatePre('__dirname/uploads/inputFile.txt');
+</script>
+
+<script>
+function log() {
+console.log(__dirname);}
+</script>
+
+</body>
+</html>
+</script>*/
+
 
 /*
 app.get('/name', callName); 
