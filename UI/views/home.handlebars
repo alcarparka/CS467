@@ -17,11 +17,10 @@
 	<h2>.txt and .csv files are accepted </h2>
 
 	<script>
-        function redirectHome() {
-        console.log("redirecting to home page");
+        function redirectCalculations() {
         setTimeout(function(){
-        console.log("done waiting in redirect home");
-	window.location.href="";
+        console.log("redirecting to calculation page");
+	window.location.href="calculations";
 	}, 15000);
         }
         </script>
@@ -75,7 +74,7 @@
         </span>
     </div>
 
-   <input type="button" value="Calculate" onclick="alert('Before double clicking Calculate to run, make sure that you have submitted an input file and filled the forms for max, min, and bin count!');" ondblclick="redirect();">
+   <input type="button" value="Calculate" onclick="redirectCalculations();">
              
    </form>
 
