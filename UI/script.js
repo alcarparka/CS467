@@ -123,22 +123,12 @@ app.get('/inputFileValidate', validateInputFile);
   
 function validateInputFile(req, res) { 
         
-        //res.render('inputFileValidate'); 
 	
 	console.log(__dirname);
 
 	var spawn = require("child_process").spawn; 
 
-	var process = spawn('python3', ["./validateInputFile.py"]); 
-      
-        var dataString = ""; 
-
-	//var results = {"id":"YoMama"};
-        //fs.readFile('__dirname/UI/uploads/inputFile.txt', 'utf8', function(err, contents) {
-        //console.log(contents);
-        //});
- 
-        //console.log('after calling readFile');
+	var process = spawn('python3', ["./validateInputFile.py"]);  
       
     	process.stdout.on('data', function(data) { 
         	//res.send(data.toString());
@@ -147,60 +137,32 @@ function validateInputFile(req, res) {
                 
         	//dataString=data.toString();
                 //console.log(dataString);
-    	})
-
-        
-/*function populatePre(url) {
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-        document.getElementById('contents').textContent = this.responseText;
-    };
-    xhr.open('GET', url);
-    xhr.send();
-}
-populatePre('__dirname/uploads/inputFile.txt');*/
-
-} 
-
-function goHome(req, res) {
-
-setTimeout(function(){
-        console.log("in goHome Function");
-        res.redirect('/');
-        }, 10000);
+    	})       
 }
 
 
+app.get('/calculations', calculateCorrelation);
 
-/*app.get('inputFileValidate2', validateInputFile);
-{
+function calculateCorrelation(req, res) {
 
-console.log(__dirname);
+
+        console.log(__dirname);
 
         var spawn = require("child_process").spawn;
 
-        var process = spawn('python3', ["./validateInputFile.py"]);*/
+        var process = spawn('python3', ["./wrapper.py"]);
 
-        /*process.stdout.on('data', function(data) { 
-                 res.send(data.toString());
-                          })*/
-        //res.render('inputFileValidate');
+        process.stdout.on('data', function(data) {
 
+		res.render('calculations', {results: data.toString()});
 
-/*<script>
-<html>
-<head>
-        <title></title>
-</head>
-<body>
+        })
+}
 
 
 
-<input type="button" id="btn" value="validate results" onclick="populatePre(); log();">
-
-<p id="fooBar"> Results of Input File Data Validation: </p>
-
-<pre id="contents"></pre>
+/*
+<pre id="contents" </pre>
 
 <script>
 function populatePre(url) {
@@ -213,15 +175,7 @@ function populatePre(url) {
 }
 populatePre('__dirname/uploads/inputFile.txt');
 </script>
-
-<script>
-function log() {
-console.log(__dirname);}
-</script>
-
-</body>
-</html>
-</script>*/
+*/
 
 
 /*
@@ -240,7 +194,8 @@ process.stdout.on('data', function(data) {
     } ) 
 }   
 */
-// New Function ^
+
+
 
 app.use(function(req,res){
     res.status(404);
