@@ -162,6 +162,7 @@ function validateInputFile(req, res) {
 
 */
 
+/*
 app.get('/calculations', calculateCorrelation);
 
 function calculateCorrelation(req, res) {
@@ -178,8 +179,32 @@ function calculateCorrelation(req, res) {
 		res.render('calculations', {results: data.toString()});
 
         })
-}
+}*/
 
+
+app.post('/graphs',function(req,res,next){
+
+	file.path = __dirname + '/tpcf_plot.png';
+	res.sendFile(__dirname + '/views/home.handlebars');
+});
+
+app.get('/calculations', calculateCorrelation);
+
+function calculateCorrelation(req, res) {
+
+
+        console.log(__dirname);
+
+        var spawn = require("child_process").spawn;
+
+        var process = spawn('python3', ["./wrapper.py"]);
+
+        process.stdout.on('data', function(data) {
+
+                res.render('home', {calculations: data.toString()});
+
+        })
+}
 
 
 /*

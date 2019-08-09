@@ -35,6 +35,14 @@
         </script>
 
 	<script>
+        function redirectGraph() {
+        console.log("redirecting to download graph");
+        window.location.href="graph";
+        }
+        </script>
+
+
+	<script>
 	function alertInput() {
 	alert("Allow a few seconds to see results of the Input Validation function. If invalid input, see comments, and send a new file.");
 	}
@@ -83,11 +91,17 @@
             <h2>{{ message }}</h2>
         </span>
     </div>
-
-   <input type="button" value="Calculate" onclick="redirectCalculations();">
              
    </form>
 
-
+ <div style="text-align: center;">
+        <span class="c">
+	<input type="button" value="Calculate" onclick="redirectCalculations();">
+            <h2>{{ calculations }}</h2>
+        </span>
+    </div>
+	<form method="POST" enctype="multipart/form-data" action="/">
+	<input type="button" value="downloadGraph" style="text-align: center" onclick="redirectGraph();"> 
+	</form>
 </body>
 </html>
