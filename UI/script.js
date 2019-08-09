@@ -118,6 +118,26 @@ app.get("/inputFileValidate", function(req, res, next){
     res.render('inputFileValidate');
 });*/
 
+app.get('/inputFileValidate', validateInputFile);
+
+function validateInputFile(req, res) {
+
+
+        console.log(__dirname);
+
+        var spawn = require("child_process").spawn;
+
+        var process = spawn('python3', ["./validateInputFile.py"]);
+
+        process.stdout.on('data', function(data) {
+
+		 res.render('home', {results: data.toString()});
+
+
+        })
+}
+
+/*
 
 app.get('/inputFileValidate', validateInputFile); 
   
@@ -140,6 +160,7 @@ function validateInputFile(req, res) {
     	})       
 }
 
+*/
 
 app.get('/calculations', calculateCorrelation);
 
