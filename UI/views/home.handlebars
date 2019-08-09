@@ -34,9 +34,16 @@
         }
         </script>
 
+	<script>
+	function alertInput() {
+	alert("Allow a few seconds to see results of the Input Validation function. If invalid input, see comments, and send a new file.");
+	}
+	</script>
+
+
         <form method="POST" enctype="multipart/form-data" action="/">
                 <input type="file" name="upload" accept=".txt, .csv" multiple>
-                <input type="submit" value="Upload"  onclick="redirect();">
+                <input type="submit" value="Upload"  onclick="redirect(); alertInput();">
         </form>
 	
 	<div></div> 
