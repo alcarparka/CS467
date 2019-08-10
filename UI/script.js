@@ -127,7 +127,7 @@ function validateInputFile(req, res) {
 
         var spawn = require("child_process").spawn;
 
-        var process = spawn('python3', ["./validateInputFile.py"]);
+        var process = spawn('python3', ["./validateInputFileImproved.py"]);
 
         process.stdout.on('data', function(data) {
 
