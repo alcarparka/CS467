@@ -48,6 +48,12 @@
 	}
 	</script>
 
+	<script>
+        function alertCalculation() {
+        alert("Allow up to 30 seconds to allow for calculate function to run and display.");
+        }
+        </script>
+
 
         <form method="POST" enctype="multipart/form-data" action="/">
                 <input type="file" name="upload" accept=".txt, .csv" multiple>
@@ -96,7 +102,7 @@
 
  <div style="text-align: center;">
         <span class="c">
-	<input type="button" value="Calculate" onclick="redirectCalculations();">
+	<input type="button" value="Calculate" onclick="redirectCalculations(); alertCalculation();">
             <h2>{{ calculations }}</h2>
         </span>
     </div>
