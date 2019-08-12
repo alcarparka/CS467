@@ -113,12 +113,22 @@
     </div>
     <div style="text-align: center;" id='graph'>
     </div>
-    <script>
-        function addGraph(){
-            var elem = document.createElement("img");
-            elem.setAttribute("src", "/tpcf_plot.png");
-            document.getElementById("graph").appendChild(elem);
-        };
-    </script>
+
+<div style="text-align: center;">
+	<input type="button" value="Show Graph" style="text-align: center" onclick="addGraph();"> 
+</div>	
+
+
+<div style="text-align: center;" id='graph'> 
+</div>
+
+<script>
+function addGraph(){
+
+var elem = document.createElement("img");
+      elem.setAttribute("src", "/tpcf_plot.png");
+      document.getElementById("graph").appendChild(elem); 
+};
+</script>
 </body>
 </html>

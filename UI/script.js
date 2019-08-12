@@ -15,6 +15,13 @@ app.set('port', 9293);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+/* New */
+var currentDir = require('path').join(__dirname);
+app.use(express.static(currentDir));
+//
+
+
 app.get("/", function(req, res, next){
     res.render('home');
 });
@@ -28,10 +35,6 @@ app.get('/myGraphs',function(req,res,next){
     console.log(context);
     res.render('myGraphs', context);
 });
-
-/*app.get('/', function (req, res){
-    res.sendFile(__dirname);
-});*/
 
 app.post('/', function (req, res){
 
@@ -63,6 +66,7 @@ app.post('/', function (req, res){
         //res.sendFile(__dirname + '/views/home.handlebars');
 
 });
+
 
 app.post('/submit-form', (req, res) => {
     const xmax = req.body.xmax;
@@ -112,11 +116,6 @@ app.post('/submit-form', (req, res) => {
 });
 
 
-// New
-/*
-app.get("/inputFileValidate", function(req, res, next){
-    res.render('inputFileValidate');
-});*/
 
 app.get('/inputFileValidate', validateInputFile);
 
@@ -137,56 +136,6 @@ function validateInputFile(req, res) {
         })
 }
 
-/*
-
-app.get('/inputFileValidate', validateInputFile); 
-  
-function validateInputFile(req, res) { 
-        
-	
-	console.log(__dirname);
-
-	var spawn = require("child_process").spawn; 
-
-	var process = spawn('python3', ["./validateInputFile.py"]);  
-      
-    	process.stdout.on('data', function(data) { 
-        	//res.send(data.toString());
-
-                res.render('inputFileValidate', {results: data.toString()});
-                
-        	//dataString=data.toString();
-                //console.log(dataString);
-    	})       
-}
-
-*/
-
-/*
-app.get('/calculations', calculateCorrelation);
-
-function calculateCorrelation(req, res) {
-
-
-        console.log(__dirname);
-
-        var spawn = require("child_process").spawn;
-
-        var process = spawn('python3', ["./wrapper.py"]);
-
-        process.stdout.on('data', function(data) {
-
-		res.render('calculations', {results: data.toString()});
-
-        })
-}*/
-
-
-app.post('/graphs',function(req,res,next){
-
-	file.path = __dirname + '/tpcf_plot.png';
-	res.sendFile(__dirname + '/views/home.handlebars');
-});
 
 app.get('/calculations', calculateCorrelation);
 
@@ -205,42 +154,6 @@ function calculateCorrelation(req, res) {
 
         })
 }
-
-
-/*
-<pre id="contents" </pre>
-
-<script>
-function populatePre(url) {
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-        document.getElementById('contents').textContent = this.responseText;
-    };
-    xhr.open('GET', url);
-    xhr.send();
-}
-populatePre('__dirname/uploads/inputFile.txt');
-</script>
-*/
-
-
-/*
-app.get('/name', callName); 
-  
-function callName(req, res) { 
-
-var spawn = require("child_process").spawn; 
-
-var process = spawn('python3',["./hello.py", 
-                            req.query.firstname, 
-                            req.query.lastname] ); 
-
-process.stdout.on('data', function(data) { 
-        res.send(data.toString()); 
-    } ) 
-}   
-*/
-
 
 
 app.use(function(req,res){
