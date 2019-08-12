@@ -85,7 +85,8 @@
             </span>
 
             <span class="c">
-            How Many bins should be used: <input type="text" name="binNum" />
+                How Many bins should be used:<br>
+                <input type="text" name="binNum" />
             </span>
             <br>
             <input type="submit" value="Submit Parameters"/>
@@ -105,17 +106,14 @@
  <div style="text-align: center;">
         <span class="c">
 	        <input type="button" value="Calculate" onclick="redirectCalculations(); alertCalculation();">
-            <h2>{{ calculations }}</h2>
+            {{#if calculations}}
+                <h2>{{ calculations }}</h2>
+            {{/if}}
         </span>
- </div>
-    <div style="text-align: center;">
+        <span class="c">
         <input type="button" value="Show Graph" style="text-align: center" onclick="addGraph();">
+        </span>
     </div>
-    <div style="text-align: center;" id='graph'>
-    </div>
-
-<div style="text-align: center;">
-	<input type="button" value="Show Graph" style="text-align: center" onclick="addGraph();"> 
 </div>	
 
 

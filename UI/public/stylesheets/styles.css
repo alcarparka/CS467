@@ -53,7 +53,7 @@ span.b{
     width: 500px;
     border: 15px solid lavender;
     padding: 5px;
-    
+    margin: 1em;
 }
 
 span.c{
@@ -62,7 +62,8 @@ span.c{
     width: 500px;
     border: 15px solid lavender;
     padding: 5px;
-    
+    margin: 1em;
+    min-height: 1em;
 }
 
 .button
