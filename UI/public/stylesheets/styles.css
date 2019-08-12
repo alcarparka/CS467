@@ -2,6 +2,7 @@ body{
     margin: 0;
     font-family: 'Indie Flower', cursive; 
     background-image: url("https://www.nasa.gov/sites/default/files/thumbnails/image/hubble_monday_07252016.jpg");
+    background-repeat: no-repeat;
     background-size: 100%;
 }
 
@@ -62,4 +63,12 @@ span.c{
     border: 15px solid lavender;
     padding: 5px;
     
+}
+
+.button
+{
+    width: 150px;
+    text-align: center;
+    margin: 0 auto;
+
 }

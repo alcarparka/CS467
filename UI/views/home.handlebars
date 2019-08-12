@@ -11,7 +11,7 @@
 	<h2> Please enter the name of the file containing the coordinates of your data in the format: </h2>
 	<p>x1, y1, z1 </p>
 	<p>x2, y2, z2 </p>
-	<p>x3, ys, z3 </p>
+	<p>x3, y3, z3 </p>
 	<p>...</p>
 
 	<h2>.txt and .csv files are accepted </h2>
@@ -92,22 +92,33 @@
         </form>
 	</div>
 
-    <div style="text-align: center;">
-        <span class="c">
-            <h2>{{ message }}</h2>
-        </span>
-    </div>
+    {{#if message}}
+        <div style="text-align: center;">
+            <span class="c">
+                <h2>{{message}}</h2>
+            </span>
+        </div>
+    {{/if}}
              
    </form>
 
  <div style="text-align: center;">
         <span class="c">
-	<input type="button" value="Calculate" onclick="redirectCalculations(); alertCalculation();">
+	        <input type="button" value="Calculate" onclick="redirectCalculations(); alertCalculation();">
             <h2>{{ calculations }}</h2>
         </span>
+ </div>
+    <div style="text-align: center;">
+        <input type="button" value="Show Graph" style="text-align: center" onclick="addGraph();">
     </div>
-	<form method="POST" enctype="multipart/form-data" action="/">
-	<input type="button" value="downloadGraph" style="text-align: center" onclick="redirectGraph();"> 
-	</form>
+    <div style="text-align: center;" id='graph'>
+    </div>
+    <script>
+        function addGraph(){
+            var elem = document.createElement("img");
+            elem.setAttribute("src", "/tpcf_plot.png");
+            document.getElementById("graph").appendChild(elem);
+        };
+    </script>
 </body>
 </html>
