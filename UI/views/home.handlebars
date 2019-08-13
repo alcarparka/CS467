@@ -103,30 +103,12 @@
              
    </form>
 
+
  <div style="text-align: center;">
         <span class="c">
 	        <input type="button" value="Calculate" onclick="redirectCalculations(); alertCalculation();">
-            {{#if calculations}}
-                <h2>{{ calculations }}</h2>
-            {{/if}}
         </span>
-        <span class="c">
-        <input type="button" value="Show Graph" style="text-align: center" onclick="addGraph();">
-        </span>
-    </div>
-</div>	
-
-
-<div style="text-align: center;" id='graph'> 
 </div>
-
-<script>
-function addGraph(){
-
-var elem = document.createElement("img");
-      elem.setAttribute("src", "/tpcf_plot.png");
-      document.getElementById("graph").appendChild(elem); 
-};
-</script>
+	
 </body>
 </html>
