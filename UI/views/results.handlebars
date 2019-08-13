@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title> <h1> Correlation Function Results </h1></title>
+</head>
+<body>
+
+
+ <div style="text-align: center;">
+        <span class="c">
+                <h2>{{ calculations }}</h2>
+        </span>
+    </div>
+</div>
+
+<div style="text-align: center;">
+	<span class="c">
+        <input type="button" value="Show Graph" style="text-align: center" onclick="addGraph();">
+        </span>
+</div>
+
+<div style="text-align: center;" id='graph'>
+</div>
+
+<script>
+function addGraph(){
+
+var elem = document.createElement("img");
+      elem.setAttribute("src", "/tpcf_plot.png");
+      document.getElementById("graph").appendChild(elem); 
+};
+</script>
+
+
+
+</body>
+</html>
