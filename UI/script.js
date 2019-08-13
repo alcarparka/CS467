@@ -36,6 +36,10 @@ app.get('/myGraphs',function(req,res,next){
     res.render('myGraphs', context);
 });
 
+app.get("/results", function(req, res, next){
+    res.render('results');
+});
+
 app.post('/', function (req, res){
 
         var form = new formidable.IncomingForm();
@@ -177,7 +181,7 @@ function validateInputFile(req, res) {
         })
 }
 
-
+/*
 app.get('/calculations', calculateCorrelation);
 
 function calculateCorrelation(req, res) {
@@ -195,7 +199,25 @@ function calculateCorrelation(req, res) {
 
         })
 }
+*/
 
+app.get('/calculations', calculateCorrelation);
+
+function calculateCorrelation(req, res) {
+
+
+        console.log(__dirname);
+
+        var spawn = require("child_process").spawn;
+
+        var process = spawn('python3', ["./wrapper.py"]);
+
+        process.stdout.on('data', function(data) {
+
+                res.render('results', {calculations: data.toString()});
+
+        })
+}
 
 app.use(function(req,res){
     res.status(404);
