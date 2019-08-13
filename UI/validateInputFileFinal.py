@@ -108,7 +108,7 @@ if __name__ == '__main__':
 
 
     if os.path.exists('uploads/inputFile.txt')==True:
-        print("inputFile.txt exists")        
+        #print("inputFile.txt exists")        
 
         with open("uploads/inputFile.txt", "r") as f:
             n=0
@@ -151,7 +151,7 @@ if __name__ == '__main__':
     #checking inputFile.csv
 
     if os.path.exists('uploads/inputFile.csv')==True:
-        print("inputFile.csv exists")
+        #print("inputFile.csv exists")
 
         with open("uploads/inputFile.csv", "r") as f:
             n=0
