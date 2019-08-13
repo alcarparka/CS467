@@ -78,6 +78,42 @@ app.post('/submit-form', (req, res) => {
     const maxLength = req.body.maxLength;
     const binNum = req.body.binNum;
 
+    var xdist = xmax - xmin;
+    var ydist = ymax - ymin;
+    var zdist = zmax - zmin;
+
+    //If x distance is greatest
+    if(xdist > ydist && xdist > zdist)
+    {
+        var distance = xdist;
+    }
+    //If y distance is greatest
+    else if(ydist > xdist && ydist > zdist)
+    {
+        var distance = ydist;
+    }
+    //If z distance is greatest
+    else if(zdist > xdist && zdist > ydist)
+    {
+        var distance = zdist;
+    }
+    //If x distance is equal to y distance but larger than z distance
+    else if(xdist == ydist && xdist > zdist)
+    {
+        var distance = xdist;
+    }
+    //If y distance is equal to z distance but larger than x distance
+    else if(ydist == zdist && ydist > xdist)
+    {
+        var distance = ydist;
+    }
+    //If z distance is equal to x distance but larger than y distance
+    else if(zdist == xdist && zdist > ydist)
+    {
+        var distance = zdist;
+    }
+
+
     if ( typeof xmax !== 'undefined' && xmax && typeof ymax !== 'undefined' && ymax && typeof zmax !== 'undefined' && zmax && typeof xmin !== 'undefined' && xmin && typeof ymin !== 'undefined' && ymin && typeof zmin !== 'undefined' && zmin && typeof maxLength !== 'undefined' && maxLength && typeof binNum !== 'undefined' && binNum)
     {
         if (xmax < 0 || ymax < 0 || zmax < 0 || xmin < 0 || ymin < 0 || zmin < 0 || maxLength < 0 || binNum < 0)
@@ -88,6 +124,11 @@ app.post('/submit-form', (req, res) => {
         else if (xmax <= xmin || ymax <= ymin || zmax <= zmin)
         {
             var message = "Error! Max values must be greater than min values!";
+            res.render('home', {message:message});
+        }
+        else if (distance < maxLength)
+        {
+            var message = "Error! Maximum correlation length must be smaller than longest axis!";
             res.render('home', {message:message});
         }
         else
