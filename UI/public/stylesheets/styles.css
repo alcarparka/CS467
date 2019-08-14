@@ -73,3 +73,8 @@ span.c{
     margin: 0 auto;
 
 }
+
+p.result{
+    color: white;
+    font-size: xx-large;
+}
