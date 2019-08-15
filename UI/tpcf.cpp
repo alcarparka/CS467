@@ -111,7 +111,7 @@ int main(void) {
 	double coords[10000][3];
    	// read coordinate data from file
    	ifstream inputFile;
-   	inputFile.open("inputFile.txt");
+   	inputFile.open("uploads/inputFile.txt");
    	if (!inputFile) {
         cout << "File failed to open. Please try again." << endl;
         return 1;
