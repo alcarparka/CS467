@@ -166,6 +166,9 @@ int main(void) {
         for (int y = 0; y < numCoords; y++) {
 			double distance = dist(coords[x], coords[y], xLength, yLength, zLength);
 			int z = 0;
+            if (distance == 0.0) {
+                z = numBins + 1;
+            }
             while (z < numBins) {
 				if (distance > bin_ranges[z] && distance < bin_ranges[z + 1]) {
 					DD_bin_counts_private[omp_get_thread_num( ) * numBins + z] += 1;
@@ -198,6 +201,9 @@ int main(void) {
         for (int y = 0; y < numRandomCoords; y++) {
             double distance = dist(coords[x], random_coords[y], xLength, yLength, zLength);
             int z = 0;
+            if (distance == 0.0) {
+                z = numBins + 1;
+            }
             while (z < numBins) {
                 if (distance > bin_ranges[z] && distance < bin_ranges[z + 1]) {
                     DR_bin_counts_private[omp_get_thread_num( ) * numBins + z] += 1;
@@ -230,6 +236,9 @@ int main(void) {
         for (int y = 0; y < numRandomCoords; y++) {
             double distance = dist(random_coords[x], random_coords[y], xLength, yLength, zLength);
             int z = 0;
+            if (distance == 0.0) {
+                z = numBins + 1;
+            }
             while (z < numBins) {
                 if (distance > bin_ranges[z] && distance < bin_ranges[z + 1]) {
                     RR_bin_counts_private[omp_get_thread_num( ) * numBins + z] += 1;
