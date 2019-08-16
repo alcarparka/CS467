@@ -73,12 +73,12 @@ app.post('/', function (req, res){
 
 
 app.post('/submit-form', (req, res) => {
-    const xmax = req.body.xmax;
-    const ymax = req.body.ymax;
-    const zmax = req.body.zmax;
-    const xmin = req.body.xmin;
-    const ymin = req.body.ymin;
-    const zmin = req.body.zmin;
+    const xmax = parseFloat(req.body.xmax);
+    const ymax = parseFloat(req.body.ymax);
+    const zmax = parseFloat(req.body.zmax);
+    const xmin = parseFloat(req.body.xmin);
+    const ymin = parseFloat(req.body.ymin);
+    const zmin = parseFloat(req.body.zmin);
     const maxLength = req.body.maxLength;
     const binNum = req.body.binNum;
 
