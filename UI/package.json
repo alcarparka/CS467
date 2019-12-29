@@ -16,7 +16,7 @@
     "express-session": "^1.16.2",
     "formidable": "^1.2.1",
     "fs": "0.0.1-security",
-    "handlebars": "^4.0.11",
+    "handlebars": "^4.3.0",
     "mysql": "^2.8.0",
     "request": "^2.88.0",
     "static": "^2.0.0"
